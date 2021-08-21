@@ -1,17 +1,19 @@
 import { useState } from 'react';
 import './App.css';
+import GoogleLogin from 'react-google-login';
 
 function App() {
-  
+
+   let responseGoogle=(response)=>{
+    console.log(response)
+    console.log(response.profileObj)
+  }
    
   let [name,setName]=useState({
     love:'',
     partner:''
   })
  
-  
-  
-  
 let change=(e)=>{
    let name=e.target.name
    let value=e.target.value
@@ -30,8 +32,6 @@ let change=(e)=>{
   let submit= async(e)=>{
     let {love,partner}=name
    e.preventDefault()
-   
-  
 
    let res=await fetch('https://love-data-672a1-default-rtdb.firebaseio.com/datalove.json',
          {method:"POST",
@@ -58,8 +58,13 @@ let change=(e)=>{
           
   return (
     <>
+    {/* <GoogleLogin clientId='123551866500-mkglvt6js4m6va9dlid94eg7r3pjqpst.apps.googleusercontent.com'
+     buttonText='Login'
+     onSuccess='this.responseGoogle'
+     onFailure='this.responseGoogle' 
+     cookiePolicy='single_host_origin' id='a' /> */}
     <div className="App">
-      <h2 id='h'>Find ❣️ % Between</h2>
+      <h2 id='h'>Find Love Between</h2>
       <form  method="POST" onSubmit={submit}>
       <div className="cont">
         <div className="list">
@@ -77,8 +82,9 @@ let change=(e)=>{
     </form>
   </div>
     <div className="fot" >
-   <h6>*We value customer privacy</h6> 
+   <h4>*We value customer privacy</h4> 
   </div>
+  
   </>
   );
 }
